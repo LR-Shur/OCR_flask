@@ -50,13 +50,19 @@ def upload_image():
             username = 1  # 默认用户ID为1
         card = Card_id(image_path=file_path, name=ocr_result["姓名"],gender=ocr_result["性别"],nation=ocr_result["民族"],
                        birthday=ocr_result["出生"],address=ocr_result["住址"],id_number=ocr_result["公民身份号码"], user_id=username)  # 绑定上传者
-        db.session.add(card)
-        db.session.commit()
+        # db.session.add(card)
+        # db.session.commit()
 
         flash('Image uploaded and OCR performed successfully!')
 
         response = {
-            "image_path": file_path
+            "image_path": file_path,
+            "name": ocr_result["姓名"],
+            "gender": ocr_result["性别"],
+            "nation": ocr_result["民族"],
+            "birthday": ocr_result["出生"],
+            "address": ocr_result["住址"],
+            "id_number": ocr_result["公民身份号码"]
         }
         return create_response(200, '上传成功', response)
 
@@ -65,6 +71,28 @@ def upload_image():
         }
         flash('Invalid file format')
         return create_response(400, '上传失败', response)
+
+
+@bp.route('/save_image', methods=['POST'])
+def save_image():
+    # 获取图片数据
+    image_path = request.json.get('image_path')
+
+    name = request.json.get('name')
+    gender = request.json.get('gender')
+    nation = request.json.get('nation')
+    birthday = request.json.get('birthday')
+    address = request.json.get('address')
+    id_number = request.json.get('id_number')
+    username = session.get('username_id')
+    if username is None:
+        username = 1  # 默认用户ID为1
+    card = Card_id(image_path=image_path, name=name,gender=gender,nation=nation,
+                   birthday=birthday,address=address,id_number=id_number, user_id=username)
+    db.session.add(card)
+    db.session.commit()
+    response = {}
+    return create_response(200, 'oj8k了', response)
 
 
 @bp.route('/register', methods=['POST'])

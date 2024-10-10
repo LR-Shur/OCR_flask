@@ -17,7 +17,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+# /interface/upload这个要传一个图片给我，然后我传json给你，"image_path": file_path,
+#             "name": ocr_result["姓名"],
+#             "gender": ocr_result["性别"],
+#             "nation": ocr_result["民族"],
+#             "birthday": ocr_result["出生"],
+#             "address": ocr_result["住址"],
+#             "id_number": ocr_result["公民身份号码"]
 @bp.route('/upload', methods=['POST'])
 def upload_image():
 
@@ -72,7 +78,7 @@ def upload_image():
         flash('Invalid file format')
         return create_response(400, '上传失败', response)
 
-
+#你把前端用户修改好的信息传给我，我把信息存到数据库里，用json传给我，也就是说你要写一个页面用于用户修改
 @bp.route('/save_image', methods=['POST'])
 def save_image():
     # 获取图片数据
@@ -94,7 +100,7 @@ def save_image():
     response = {}
     return create_response(200, 'oj8k了', response)
 
-
+#注册路由，传入用户名，邮箱，密码，返回注册成功，邮箱你乱改一个就行
 @bp.route('/register', methods=['POST'])
 def register_user():
     username = request.json.get('username')
@@ -128,7 +134,7 @@ def register_user():
     flash('注册成功！', 'success')
     return create_response(200, '注册成功')
 
-
+#登录路由，传入用户名和密码，返回登录成功
 @bp.route('/login', methods=['POST'])
 def login_user():
     username = request.json.get('username')
@@ -155,7 +161,16 @@ def get_user_info():
             })
     return create_response(400, '未登录或用户不存在')
 
-
+#获取用户上传的图片，一个大json,里面每个小json包含图片的base64编码和图片信息内容为
+# 'image_path': image.image_path,
+#             'image_base64': img_base64,  # Base64编码的图片数据
+#             'name': image.name,
+#             'gender': image.gender,
+#             'nation': image.nation,
+#             'birthday': image.birthday,
+#             'address': image.address,
+#             'id_number': image.id_number,
+#             'upload_time': image.created_at  # 假设有这个字段
 @bp.route('/user_images', methods=['GET'])
 def get_user_images():
     # 获取当前登录用户的ID
@@ -194,7 +209,7 @@ def get_user_images():
             'birthday': image.birthday,
             'address': image.address,
             'id_number': image.id_number,
-            'upload_time': image.created_at  # 假设有这个字段
+
         })
 
     # 返回用户图片信息及Base64编码的图片内容

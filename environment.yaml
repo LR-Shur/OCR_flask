@@ -1,0 +1,24 @@
+name: flask-tutorial
+channels:
+  - defaults
+dependencies:
+  - python=3.9  # 指定Python版本
+
+  - pip
+  - pip:
+      - paddlepaddle==2.4.0
+      - opencv-python
+      - flask
+      - pytorch
+      - ultralytics
+      - torchvision
+      - shapely
+      - graphviz
+      - paddlehub
+      - flask_sqlalchemy
+      - pyclipper
+      - paddlenlp==2.5.2
+      - pymysql
+      - flask_migrate
+      - cryptography
+      - openvino

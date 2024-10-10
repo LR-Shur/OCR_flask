@@ -1,0 +1,118 @@
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header and navigation */
+header {
+    background-color: #2c3e50;
+    padding: 1rem;
+    color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #34495e;
+}
+
+/* Main content section */
+main {
+    padding: 2rem;
+    background-color: white;
+    min-height: 80vh;
+    margin: 20px auto;
+    max-width: 80%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #2c3e50;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Buttons */
+button {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3498db;
+}
+
+/*分页导航*/.pagination-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;  /* 背景颜色 */
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* 底部阴影效果 */
+    z-index: 1000;  /* 确保导航在其他元素上方 */
+}
+
+.pagination-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.pagination-bar li {
+    display: inline;
+    margin: 0 5px;  /* 适当间距 */
+}
+
+.pagination-bar a {
+    text-decoration: none;
+    color: white;  /* 链接颜色 */
+    background-color: #007bff;  /* 按钮背景颜色 */
+    padding: 8px 12px;  /* 按钮内边距 */
+    border-radius: 4px;  /* 圆角效果 */
+    transition: background-color 0.3s;  /* 过渡效果 */
+}
+
+.pagination-bar a:hover {
+    background-color: #0056b3;  /* 悬停时的背景颜色 */
+}
+
+.pagination-bar a.active {
+    background-color: #0056b3;  /* 当前页的颜色 */
+    pointer-events: none;  /* 禁用当前页的点击 */
+}

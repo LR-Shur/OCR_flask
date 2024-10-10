@@ -1,0 +1,50 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}卡片管理{% endblock %}
+
+{% block content %}
+<!-- 卡片列表 -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Image Path</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Nation</th>
+            <th>Birthday</th>
+            <th>Address</th>
+            <th>ID Number</th>
+        </tr>
+        {% for card in cards %}
+        <tr>
+            <td>{{ card.id }}</td>
+            <td>{{ card.image_path }}</td>
+            <td>{{ card.name }}</td>
+            <td>{{ card.gender }}</td>
+            <td>{{ card.nation }}</td>
+            <td>{{ card.birthday }}</td>
+            <td>{{ card.address }}</td>
+            <td>{{ card.id_number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- 分页导航 -->
+    <div class="pagination-bar">
+        <ul>
+            {% if pagination.has_prev %}
+                <li><a href="{{ url_for('base.card_list', page=pagination.prev_num) }}">Previous</a></li>
+            {% endif %}
+            {% for page_num in pagination.iter_pages() %}
+                {% if page_num %}
+                    <li><a href="{{ url_for('base.card_list', page=page_num) }}">{{ page_num }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if pagination.has_next %}
+                <li><a href="{{ url_for('base.card_list', page=pagination.next_num) }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
+

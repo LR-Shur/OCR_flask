@@ -1,0 +1,29 @@
+传图片接口
+# /interface/upload这个要传一个图片给我，然后我传json给你，"image_path": file_path,
+#             "name": ocr_result["姓名"],
+#             "gender": ocr_result["性别"],
+#             "nation": ocr_result["民族"],
+#             "birthday": ocr_result["出生"],
+#             "address": ocr_result["住址"],
+#             "id_number": ocr_result["公民身份号码"]
+
+保存接口
+#/interface/save_image你把前端用户修改好的信息传给我，我把信息存到数据库里，用json传给我，也就是说你要写一个页面用于用户修改
+
+注册接口
+#/interface/register注册路由，传入用户名，邮箱，密码，返回注册成功，邮箱随便输，反正不查
+
+登录接口
+#/interface/login登录路由，传入用户名和密码，返回登录成功
+
+查看接口
+#/interface/user_images获取用户上传的图片，一个大json,里面每个小json包含图片的base64编码和图片信息内容为
+# 'image_path': image.image_path,
+#             'image_base64': img_base64,  # Base64编码的图片数据
+#             'name': image.name,
+#             'gender': image.gender,
+#             'nation': image.nation,
+#             'birthday': image.birthday,
+#             'address': image.address,
+#             'id_number': image.id_number,
+#             'upload_time': image.created_at  # 假设有这个字段

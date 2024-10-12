@@ -1,5 +1,6 @@
+import base64
 import os
-from flask import Blueprint, request, redirect, url_for, flash,jsonify,session
+from flask import Blueprint, request, redirect, url_for, flash,jsonify,session,send_file
 from werkzeug.utils import secure_filename
 from flaskr.exts import db
 from flaskr.models import Card_id
@@ -7,7 +8,7 @@ from flaskr.models import User
 from flaskr.tools.data_json import create_response
 from ocr.detect_interface import detect_interface
 import cv2
-import base64
+
 bp = Blueprint('interface', __name__, url_prefix='/interface')
 
 # 设置允许的文件类型
@@ -49,6 +50,7 @@ def upload_image():
 
         # 调用OCR函数识别
         ocr_result = detect_interface(img)
+        print(ocr_result)
 
         # 将结果保存到数据库
         username = session.get('username_id')
@@ -214,3 +216,16 @@ def get_user_images():
 
     # 返回用户图片信息及Base64编码的图片内容
     return create_response(200, '用户图片获取成功', images_data)
+
+
+@bp.route('/download_image/<image_path>', methods=['GET'])
+def download_image(image_path):
+    # 获取完整的图片路径
+    image_full_path = os.path.join(r'M:\python\OCR_flask\uploads', image_path)
+
+    # 检查图片是否存在
+    if not os.path.exists(image_full_path):
+        return create_response(404, '图片未找到')
+
+    # 使用 send_file 将图片文件发送给前端
+    return send_file(image_full_path, mimetype='image/jpeg')

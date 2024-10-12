@@ -27,4 +27,4 @@ app.register_blueprint(interface_bp)
 app.secret_key = "this_is_key"
 
 if __name__ == '__main__':
-    app.run(host="192.168.156.66")
+    app.run(host="172.27.45.105")
